@@ -1,22 +1,35 @@
 /* src/components/common/Loader.css */
-.loader {
+.loader-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	background-color: #f0f0f0; /* Optional: Adds a background color for better visibility */
 }
 
-.spinner {
-	width: 50px;
-	height: 50px;
-	border: 5px solid rgba(0, 0, 0, 0.1);
-	border-top-color: darkmarineblue; /* Replace with the exact color code if necessary */
+.loader {
+	width: 48px;
+	height: 48px;
 	border-radius: 50%;
-	animation: spin 1s linear infinite;
+	display: inline-block;
+	position: relative;
+	border: 10px solid;
+	box-sizing: border-box;
+	animation: animloader 1s linear infinite;
 }
 
-@keyframes spin {
-	to {
-		transform: rotate(360deg);
+@keyframes animloader {
+	0% {
+		border-color: #004998 rgba(0, 123, 255, 0) rgba(0, 123, 255, 0)
+			rgba(0, 123, 255, 0); /* Light blue */
+	}
+	33% {
+		border-color: #004998 #0056b3 rgba(0, 123, 255, 0) rgba(0, 123, 255, 0); /* Medium blue */
+	}
+	66% {
+		border-color: #004998 #0056b3 #003d80 rgba(0, 123, 255, 0); /* Darker blue */
+	}
+	100% {
+		border-color: #004998 #0056b3 #003d80 #00264d; /* Darkest blue */
 	}
 }

@@ -1,7 +1,7 @@
 // src/routes.tsx
 import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import ProtectedRoute from "./protectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 import Loader from "./components/common/Loader/Loader";
 
 const Login = lazy(() => import("./components/auth/Login"));

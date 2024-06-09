@@ -12,7 +12,7 @@ import { useAuth } from "../../contexts/authContext";
 const Home: React.FC = () => {
 	const { loggedIn } = useAuth();
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-400 p-8">
+		<div className="min-h-screen bg-gradient-to-br from-blue-500 to-blue-900 p-8">
 			<div className=" bg-white bg-opacity-50 rounded-lg p-8 max-w-4xl mx-auto text-center shadow-lg">
 				<div className="h-96 flex flex-col justify-center items-center">
 					<img
@@ -31,13 +31,13 @@ const Home: React.FC = () => {
 					{!loggedIn ? (
 						<div className="flex justify-center space-x-4">
 							<Link to="/login">
-								<button className="bg-blue-600 text-white py-2 px-6 rounded-full shadow-md hover:bg-blue-500 transition-all flex items-center space-x-2">
+								<button className="bg-blue-600 text-white py-2 px-6 rounded-full shadow-md hover:bg-blue-500 hover:scale-105 transition-all flex items-center space-x-2">
 									<FaSignInAlt />
 									<span>Login</span>
 								</button>
 							</Link>
 							<Link to="/signup">
-								<button className="bg-gray-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition-all flex items-center space-x-2">
+								<button className="bg-gray-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-gray-600 hover:scale-105 transition-all flex items-center space-x-2">
 									<FaUserPlus />
 									<span>Sign Up</span>
 								</button>

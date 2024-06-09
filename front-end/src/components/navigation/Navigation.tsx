@@ -24,7 +24,7 @@ const Navigation: React.FC = () => {
 		}`;
 
 	return (
-		<nav className="bg-gray-800 p-4">
+		<nav className="bg-gray-800 p-2">
 			<ul className="flex items-center justify-start space-x-4">
 				<li className="self-start">
 					<NavLink to="/">

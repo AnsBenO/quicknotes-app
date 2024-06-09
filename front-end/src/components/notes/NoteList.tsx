@@ -62,6 +62,9 @@ const NoteList: React.FC = () => {
 						<p className="text-gray-700 mt-2 truncate">
 							{note.text.slice(0, 100)}...
 						</p>
+						<p className="text-gray-500 mt-1 text-sm">
+							{new Date(note.createdAt).toLocaleString()}
+						</p>
 						<FaTrashAlt
 							className="absolute top-2 right-2 text-gray-400 hover:text-gray-700 cursor-pointer"
 							onClick={() => handleRemoveClick(note._id, token)}

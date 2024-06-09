@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteNote, getNote, updateNote } from "../../services/noteService";
 import { TNote } from "../../types/note";
 import { FaPen, FaTrashAlt } from "react-icons/fa";
+import Loader from "../common/Loader/Loader";
 
 const NoteDetail: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -63,24 +64,17 @@ const NoteDetail: React.FC = () => {
 	};
 
 	if (!note) {
-		return (
-			<div className="flex text-center mt-8 text-gray-500">
-				No Note Found{" "}
-				<button
-					className="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all"
-					onClick={() => navigate("/notes")}
-				>
-					Back to Notes
-				</button>
-			</div>
-		);
+		return <Loader />;
 	}
 
 	return (
 		<div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8 relative">
-			<h2 className="text-3xl font-extrabold mb-4 text-blue-900">
+			<h2 className="text-3xl font-extrabold mb-1 text-blue-900">
 				{note.title}
 			</h2>
+			<p className="text-gray-500 mt-1 text-sm mb-4">
+				{new Date(note.createdAt).toLocaleString()}
+			</p>
 			<div className="text-gray-700 text-lg break-words whitespace-pre-wrap p-4 border border-gray-200 rounded-lg">
 				{isEditing ? (
 					<textarea

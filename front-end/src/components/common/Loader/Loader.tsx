@@ -1,10 +1,10 @@
 // src/components/common/Loader.tsx
 import React from "react";
-import "./Loader.css"; // Import the CSS file
+import "./Loader.css";
 
 const Loader: React.FC = () => (
-	<div className="loader">
-		<div className="spinner"></div>
+	<div className="loader-container">
+		<span className="loader"></span>{" "}
 	</div>
 );
 
