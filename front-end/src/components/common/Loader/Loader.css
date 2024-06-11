@@ -15,10 +15,10 @@
 	position: relative;
 	border: 10px solid;
 	box-sizing: border-box;
-	animation: animloader 1s linear infinite;
+	animation: animate-loader 0.5s linear infinite;
 }
 
-@keyframes animloader {
+@keyframes animate-loader {
 	0% {
 		border-color: #004998 rgba(0, 123, 255, 0) rgba(0, 123, 255, 0)
 			rgba(0, 123, 255, 0); /* Light blue */

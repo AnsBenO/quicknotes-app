@@ -1,4 +1,5 @@
 // src/components/auth/Login.tsx
+import "./auth.css";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthService } from "../../services/authService";
@@ -25,11 +26,11 @@ const Login: React.FC = () => {
 			<img
 				src="/logo-white-notitle.png"
 				alt="Logo"
-				className="w-24 h-24 mb-4 animate-bounce"
+				className="w-24 h-24 mb-4 animate"
 			/>
 			<form
 				onSubmit={handleSubmit}
-				className="bg-white px-6 pb-6 pt-4 rounded-lg shadow-lg w-full max-w-sm"
+				className="bg-white px-6 pb-6 pt-4 rounded-lg shadow-lg w-full max-w-sm animate"
 			>
 				<h2 className="text-xl font-bold text-center text-gray-700 mb-4">
 					Login to Your Account

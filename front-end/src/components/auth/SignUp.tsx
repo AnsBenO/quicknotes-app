@@ -1,4 +1,5 @@
 // src/components/auth/SignUp.tsx
+import "./auth.css";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthService } from "../../services/authService";
@@ -53,15 +54,15 @@ const SignUp: React.FC = () => {
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen h-fit bg-gradient-to-r from-cyan-600 to-blue-900">
+		<div className="flex flex-col items-center justify-center min-h-screen h-fit bg-gradient-to-r from-blue-500 to-blue-900">
 			<img
 				src="/logo-white-notitle.png"
 				alt="Logo"
-				className="w-24 h-24 mb-4 animate-bounce"
+				className="w-24 h-24 mb-4 animate"
 			/>
 			<form
 				onSubmit={handleSubmit}
-				className="bg-white px-6 pb-4 pt-4 rounded-lg shadow-lg w-full max-w-sm"
+				className="bg-white px-6 pb-4 pt-4 rounded-lg shadow-lg w-full max-w-sm animate"
 			>
 				<h2 className="text-xl font-bold text-center text-gray-700 mb-4">
 					Create Your Account
@@ -81,13 +82,17 @@ const SignUp: React.FC = () => {
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
 							className={`w-full pl-8 pr-2 py-1.5 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 ${
-								errors.username ? "border-red-500" : "border-gray-300"
+								errors.username
+									? "border-red-500"
+									: "border-gray-300"
 							}`}
 							placeholder="Enter your username"
 						/>
 					</div>
 					{errors.username && (
-						<p className="text-red-500 text-xs mt-1">{errors.username}</p>
+						<p className="text-red-500 text-xs mt-1">
+							{errors.username}
+						</p>
 					)}
 				</div>
 				<div className="mb-3">
@@ -105,13 +110,17 @@ const SignUp: React.FC = () => {
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							className={`w-full pl-8 pr-2 py-1.5 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 ${
-								errors.email ? "border-red-500" : "border-gray-300"
+								errors.email
+									? "border-red-500"
+									: "border-gray-300"
 							}`}
 							placeholder="Enter your email"
 						/>
 					</div>
 					{errors.email && (
-						<p className="text-red-500 text-xs mt-1">{errors.email}</p>
+						<p className="text-red-500 text-xs mt-1">
+							{errors.email}
+						</p>
 					)}
 				</div>
 				<div className="mb-3">
@@ -129,13 +138,17 @@ const SignUp: React.FC = () => {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							className={`w-full pl-8 pr-2 py-1.5 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 ${
-								errors.password ? "border-red-500" : "border-gray-300"
+								errors.password
+									? "border-red-500"
+									: "border-gray-300"
 							}`}
 							placeholder="Enter your password"
 						/>
 					</div>
 					{errors.password && (
-						<p className="text-red-500 text-xs mt-1">{errors.password}</p>
+						<p className="text-red-500 text-xs mt-1">
+							{errors.password}
+						</p>
 					)}
 				</div>
 				<div className="mb-5">
@@ -153,7 +166,9 @@ const SignUp: React.FC = () => {
 							value={confirmPassword}
 							onChange={(e) => setConfirmPassword(e.target.value)}
 							className={`w-full pl-8 pr-2 py-1.5 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 ${
-								errors.confirmPassword ? "border-red-500" : "border-gray-300"
+								errors.confirmPassword
+									? "border-red-500"
+									: "border-gray-300"
 							}`}
 							placeholder="Confirm your password"
 						/>
