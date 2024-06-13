@@ -1,4 +1,3 @@
-// controllers/userController.ts
 import createHttpError from "http-errors";
 import bcrypt from "bcrypt";
 import UserModel from "../models/User";

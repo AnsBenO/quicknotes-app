@@ -5,6 +5,7 @@ import cors from "cors";
 import { connectToDatabase } from "./config/database";
 import userRouter from "./routes/userRouter";
 import notesRouter from "./routes/noteRouter";
+import { errorHandler } from "./middleware/errorHandler";
 dotenv.config();
 
 const app = express();
@@ -20,6 +21,8 @@ connectToDatabase()
 		app.use("/api/users", userRouter);
 
 		app.use("/api/notes", notesRouter);
+
+		app.use(errorHandler);
 
 		app.listen(port, () => {
 			console.log(`app is on ${port}`);
