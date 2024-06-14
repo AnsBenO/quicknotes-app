@@ -17,7 +17,7 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(
     !!localStorage.getItem('authToken')
   );
-  public isLoggedIn$ = this.loggedIn.asObservable();
+  public isAuthenticated$ = this.loggedIn.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {
     const token = localStorage.getItem('authToken');
