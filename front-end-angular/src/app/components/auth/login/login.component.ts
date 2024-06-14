@@ -14,10 +14,10 @@ import {
   signal,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AuthService } from '../../../services/authService.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { take } from 'rxjs';
-import { ErrorResponse } from '../../../types/error-response';
+import { ErrorResponse } from '../../../types/errorResponse';
 
 @Component({
   selector: 'app-login',

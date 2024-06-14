@@ -3,10 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
-import { LoginResponse } from '../types/login-response';
-import { SignupResponse } from '../types/signup-response';
-import { LogoutResponse } from '../types/logout-response';
+import { LoginResponse, LogoutResponse, SignupResponse } from '../types/auth';
 
 const API_URL = 'http://localhost:3003/api/users';
 

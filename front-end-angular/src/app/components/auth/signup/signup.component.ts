@@ -15,9 +15,9 @@ import {
 import { matchPasswords } from './match-paswords-validaor';
 import { TrimInputDirective } from '../trim-input.directive';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../../services/authService.service';
+import { AuthService } from '../../../services/auth.service';
 import { take } from 'rxjs';
-import { ErrorResponse } from '../../../types/error-response';
+import { ErrorResponse } from '../../../types/errorResponse';
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
