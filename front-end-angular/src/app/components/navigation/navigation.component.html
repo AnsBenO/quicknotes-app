@@ -1,0 +1,55 @@
+<nav class="bg-white p-2 shadow">
+  <ul class="flex items-center justify-start space-x-6">
+    <li class="self-start">
+      <a routerLink="/">
+        <img src="/logo-white-notitle.png" alt="Logo" class="h-10 w-10" />
+      </a>
+    </li>
+
+    <!-- ? Conditional rendering  -->
+
+    @if (authService.isLoggedIn$ | async) {
+    <li>
+      <a
+        routerLink="/notes"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Notes</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/create-note"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Create Note</a
+      >
+    </li>
+    <li>
+      <button (click)="handleLogout()">Logout</button>
+    </li>
+
+    }@else {
+
+    <!-- ?Guest Links -->
+
+    <li>
+      <a
+        routerLink="/login"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Login</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/signup"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Sign Up</a
+      >
+    </li>
+
+    }
+  </ul>
+</nav>

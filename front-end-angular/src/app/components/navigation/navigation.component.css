@@ -1,0 +1,22 @@
+li:not(:first-child) a:not(.is-active),
+li button {
+  @apply text-gray-200 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700;
+}
+
+/* Style for active links */
+.is-active {
+  @apply text-white px-4 py-2 rounded-md text-sm font-medium bg-gradient-to-r from-blue-400 to-indigo-400;
+}
+
+/* Navbar specific styles */
+nav {
+  @apply bg-gray-800 shadow p-2;
+}
+
+ul {
+  @apply flex items-center justify-start space-x-6;
+}
+
+img {
+  @apply h-10 w-10;
+}
