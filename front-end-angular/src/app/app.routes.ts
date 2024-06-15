@@ -30,18 +30,18 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'notes/:id',
-    loadComponent: () =>
-      import('./components/notes/note-detail/note-detail.component').then(
-        (m) => m.NoteDetailComponent
-      ),
-    canActivate: [authGuard],
-  },
-  {
     path: 'notes/new',
     loadComponent: () =>
       import('./components/notes/note-create/note-create.component').then(
         (m) => m.NoteCreateFormComponent
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'notes/:id',
+    loadComponent: () =>
+      import('./components/notes/note-detail/note-detail.component').then(
+        (m) => m.NoteDetailComponent
       ),
     canActivate: [authGuard],
   },

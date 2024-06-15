@@ -7,10 +7,9 @@
   </p>
   <div class="">
     @if(isEditing()){
-
     <textarea
       [(ngModel)]="editedNote"
-      name="edit"
+      name="editedNote"
       (keydown)="handleKeyDown($event)"
       class="text-gray-700 text-lg break-words whitespace-pre-wrap p-4 border w-full"
     ></textarea>
