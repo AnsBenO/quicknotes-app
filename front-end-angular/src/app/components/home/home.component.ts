@@ -1,12 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faShareAlt,
+  faSignInAlt,
+  faStickyNote,
+  faSyncAlt,
+  faTags,
+  faUserPlus,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './home.component.html',
   styles: `
     :host {
@@ -15,4 +28,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent { }
+export class HomeComponent {
+  signinIcon = faSignInAlt;
+  userIcon = faUserPlus;
+  stickyNoteIcon = faStickyNote;
+  tagsIcon = faTags;
+  syncIcon = faSyncAlt;
+  shareIcon = faShareAlt;
+
+  constructor(public authService: AuthService) {}
+}

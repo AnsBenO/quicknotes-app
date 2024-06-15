@@ -1,22 +1,16 @@
-li:not(:first-child) a:not(.is-active),
-li button {
+li a:not(.is-active) {
   @apply text-gray-200 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700;
 }
 
-/* Style for active links */
 .is-active {
-  @apply text-white px-4 py-2 rounded-md text-sm font-medium bg-gradient-to-r from-blue-400 to-indigo-400;
+  @apply text-white px-4 py-2 rounded-2xl text-sm font-medium bg-gradient-to-r from-blue-400 to-indigo-400 border-transparent border-2 border-solid;
 }
 
-/* Navbar specific styles */
-nav {
-  @apply bg-gray-800 shadow p-2;
-}
-
-ul {
-  @apply flex items-center justify-start space-x-6;
-}
-
-img {
-  @apply h-10 w-10;
+/* .buttons a :not(.is-active),
+.buttons button {
+  @apply border-2 border-solid border-blue-400 hover:bg-gray-700;
+} */
+.buttons a:not(.is-active),
+.buttons button:not(.is-active) {
+  @apply text-gray-200 px-4 py-2 rounded-2xl text-sm font-medium bg-slate-900 border-2 border-solid border-blue-400 hover:bg-gray-700;
 }
