@@ -1,12 +1,12 @@
-export interface User {
-  username?: string;
-  email: string;
+export interface TUser {
+  username: string;
+  email?: string;
   password: string;
   _id: string;
   __v: number;
 }
 export interface LoginResponse {
-  user: User;
+  user: TUser;
   token: string;
   refreshToken: string;
 }
@@ -15,7 +15,7 @@ export interface LogoutResponse {
 }
 
 export interface SignupResponse {
-  user: User;
+  user: TUser;
   token: string;
   refreshToken: string;
 }

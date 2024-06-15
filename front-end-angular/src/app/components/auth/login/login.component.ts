@@ -58,7 +58,7 @@ export class LoginComponent {
         .pipe(take(1))
         .subscribe({
           next: () => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/notes']);
           },
           error: (response) => {
             this.errorMessage.set((response.error as ErrorResponse).error);
