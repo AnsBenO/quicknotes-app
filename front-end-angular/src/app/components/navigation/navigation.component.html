@@ -1,9 +1,16 @@
 <nav class="bg-gray-800 shadow p-2">
   <div class="flex justify-between items-center gap-2">
-    <div>
-      <a routerLink="/">
+    <div class="flex gap-1">
+      <a routerLink="/home">
         <img src="/logo-white-notitle.png" alt="Logo" class="h-10 w-10" />
       </a>
+      <a
+        class="home"
+        routerLink="/home"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >home</a
+      >
     </div>
 
     <!-- ? Conditional rendering  -->
