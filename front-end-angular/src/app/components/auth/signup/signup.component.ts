@@ -13,7 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { matchPasswords } from './match-paswords-validaor';
-import { TrimInputDirective } from '../trim-input.directive';
+import { TrimInputDirective } from '../../../directives/trim-input.directive';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { take } from 'rxjs';

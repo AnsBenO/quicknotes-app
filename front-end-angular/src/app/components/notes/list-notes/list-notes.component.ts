@@ -13,6 +13,7 @@ import { TNote } from '../../../types/note';
 import { RouterModule } from '@angular/router';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-list-notes',
@@ -29,6 +30,10 @@ export class ListNotesComponent implements OnInit, OnDestroy {
 
   constructor(private noteService: NoteService) {}
   ngOnInit(): void {
+    this.getNotes();
+  }
+
+  private getNotes() {
     this.noteService
       .getNotes()
       .pipe(takeUntil(this.destroy$))
@@ -49,8 +54,10 @@ export class ListNotesComponent implements OnInit, OnDestroy {
         this.notes.update((notes) => notes.filter((n) => n._id !== noteId))
       );
   }
+
   ngOnDestroy(): void {
     this.destroy$.next();
+    console.log('destroyed');
     this.destroy$.complete();
   }
 }

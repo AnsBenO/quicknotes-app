@@ -8,7 +8,6 @@ import { AuthenticatedRequest } from "../middleware/auth";
 dotenv.config();
 
 let secret: string = process.env.SESSION_SECRET as string;
-let token: string = process.env.REFRESH_TOKEN_SECRET as string;
 
 export const getAuthenticatedUser = async (
 	req: AuthenticatedRequest,
@@ -47,7 +46,7 @@ export const signUp = async (
 	console.log(secret);
 	try {
 		if (!username || !email || !passwordRaw) {
-			throw createHttpError(400, "Parameters missing");
+			throw createHttpError(400, "All fields are required");
 		}
 
 		const existingUsername = await UserModel.findOne({
@@ -105,7 +104,7 @@ export const login = async (
 
 	try {
 		if (!username || !password) {
-			throw createHttpError(400, "Parameters missing");
+			throw createHttpError(400, "All fields are required");
 		}
 
 		const user = await UserModel.findOne({ username: username }).select(
@@ -128,6 +127,25 @@ export const login = async (
 			expiresIn: "7d",
 		});
 		res.status(200).json({ user, token, refreshToken });
+	} catch (error) {
+		next(error);
+	}
+};
+export const refreshToken = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const { token } = req.body;
+	try {
+		if (!token) {
+			throw createHttpError(400, "Refresh token required");
+		}
+		const decoded = jwt.verify(token, secret) as { userId: string };
+		const newAccessToken = jwt.sign({ userId: decoded.userId }, secret, {
+			expiresIn: "15m",
+		});
+		res.status(200).json({ token: newAccessToken });
 	} catch (error) {
 		next(error);
 	}

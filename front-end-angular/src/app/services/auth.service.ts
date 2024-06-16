@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { LoginResponse, LogoutResponse, SignupResponse } from '../types/auth';
 
 const API_URL = 'http://localhost:3003/api/users';
@@ -15,10 +15,16 @@ export class AuthService {
     !!localStorage.getItem('authToken')
   );
   public isAuthenticated$ = this.loggedIn.asObservable();
+  private refreshTokenTimeout: any;
+  token: WritableSignal<string | null> = signal<string | null>(null);
 
   constructor(private http: HttpClient, private router: Router) {
     const token = localStorage.getItem('authToken');
-    this.loggedIn.next(!!token);
+    if (token) {
+      this.loggedIn.next(true);
+      this.token.set(token);
+      this.startRefreshTokenTimer();
+    }
   }
 
   loginUser(username: string, password: string): Observable<LoginResponse> {
@@ -26,12 +32,59 @@ export class AuthService {
       .post<LoginResponse>(`${API_URL}/login`, { username, password })
       .pipe(
         tap((response) => {
-          if (response.token) {
+          if (response.token && response.refreshToken) {
             localStorage.setItem('authToken', response.token);
+            localStorage.setItem('refreshToken', response.refreshToken);
             this.loggedIn.next(true);
+            this.token.set(response.token);
+            this.startRefreshTokenTimer();
           }
         })
       );
+  }
+
+  refreshToken(): Observable<{ token: string }> {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) {
+      return throwError(() => new Error('No refresh token found'));
+    }
+
+    return this.http
+      .post<{ token: string }>(`${API_URL}/refresh-token`, {
+        token: refreshToken,
+      })
+      .pipe(
+        map((response) => {
+          if (response.token) {
+            localStorage.setItem('authToken', response.token);
+            this.startRefreshTokenTimer();
+            return response;
+          }
+          throw new Error('Invalid response');
+        }),
+        catchError((err) => {
+          this.logoutUser().subscribe();
+          console.error(err);
+          return throwError(() => err);
+        })
+      );
+  }
+
+  private startRefreshTokenTimer() {
+    const token = localStorage.getItem('authToken');
+    if (!token) return;
+
+    const jwtToken = JSON.parse(atob(token.split('.')[1]));
+    const expires = new Date(jwtToken.exp * 1000);
+    const timeout = expires.getTime() - Date.now() - 60 * 1000;
+    this.refreshTokenTimeout = setTimeout(
+      () => this.refreshToken().subscribe(),
+      timeout
+    );
+  }
+
+  private stopRefreshTokenTimer() {
+    clearTimeout(this.refreshTokenTimeout);
   }
 
   signUpUser(
@@ -47,8 +100,16 @@ export class AuthService {
   }
 
   logoutUser(): Observable<LogoutResponse> {
-    return this.http
-      .post<LogoutResponse>(`${API_URL}/logout`, {})
-      .pipe(tap({ next: () => this.loggedIn.next(false) }));
+    return this.http.post<LogoutResponse>(`${API_URL}/logout`, {}).pipe(
+      tap({
+        next: () => {
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('refreshToken');
+          this.token.set(null);
+          this.loggedIn.next(false);
+          this.stopRefreshTokenTimer();
+        },
+      })
+    );
   }
 }

@@ -57,7 +57,7 @@ export const createNote = async (
 
 	try {
 		if (!title || !text) {
-			throw createHttpError(400, "Title and text are required");
+			throw createHttpError(400, "All fields are required");
 		}
 
 		const newNote = await NoteModel.create({
@@ -87,7 +87,7 @@ export const updateNote = async (
 
 	try {
 		if (!title || !text) {
-			throw createHttpError(400, "Title and text are required");
+			throw createHttpError(400, "All fields are required");
 		}
 
 		const note = await NoteModel.findById(noteId);
