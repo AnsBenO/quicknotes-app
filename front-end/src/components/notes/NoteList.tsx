@@ -22,7 +22,7 @@ const NoteList: React.FC = () => {
 		};
 
 		fetchNotes();
-	}, [token]);
+	});
 
 	const handleRemoveClick = async (id: string, token: string | null) => {
 		try {
@@ -42,12 +42,12 @@ const NoteList: React.FC = () => {
 			</h2>
 			<Link
 				to="/create-note"
-				className="block text-center bg-blue-700 text-white px-4 py-3 rounded-lg hover:bg-blue-600 hover:scale-105 transition-all mb-6 inline-flex items-center justify-center space-x-2"
+				className="text-center bg-blue-700 text-white px-4 py-3 rounded-lg hover:bg-blue-600 hover:scale-105 transition-all mb-6 items-center justify-center space-x-2 inline-flex"
 			>
 				<FaPlus />
 				<span>Create Note</span>
 			</Link>
-			<ul className="space-y-6">
+			<ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 				{notes.map((note: TNote) => (
 					<li
 						key={note._id}

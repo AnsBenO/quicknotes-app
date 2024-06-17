@@ -1,6 +1,6 @@
 // src/components/navigation/Navigation.tsx
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/authContext";
+import { useAuth } from "../../contexts/useAuth";
 import { useAuthService } from "../../services/authService";
 
 const Navigation: React.FC = () => {

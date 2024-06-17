@@ -13,7 +13,6 @@ import { TNote } from '../../../types/note';
 import { RouterModule } from '@angular/router';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-list-notes',

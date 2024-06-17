@@ -7,7 +7,7 @@ import {
 	FaSyncAlt,
 	FaShareAlt,
 } from "react-icons/fa";
-import { useAuth } from "../../contexts/authContext";
+import { useAuth } from "../../contexts/useAuth";
 
 const Home: React.FC = () => {
 	const { loggedIn } = useAuth();
@@ -22,11 +22,13 @@ const Home: React.FC = () => {
 					/>
 					<h1 className="text-5xl font-extrabold text-gray-900 mb-4">
 						Welcome to{" "}
-						<span className="font-logo text-blue-800">QUICKNOTES</span>
+						<span className="font-logo text-blue-800">
+							QUICKNOTES
+						</span>
 					</h1>
 					<p className="text-gray-700 text-lg mb-8">
-						Your ultimate note-taking app. Organize your thoughts, ideas, and
-						tasks effortlessly.
+						Your ultimate note-taking app. Organize your thoughts,
+						ideas, and tasks effortlessly.
 					</p>
 					{!loggedIn ? (
 						<div className="flex justify-center space-x-4">
@@ -55,7 +57,8 @@ const Home: React.FC = () => {
 						<span>Create Notes</span>
 					</h2>
 					<p className="text-gray-600">
-						Easily create notes to keep track of your thoughts and tasks.
+						Easily create notes to keep track of your thoughts and
+						tasks.
 					</p>
 				</div>
 				<div className="bg-indigo-100 p-6 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 m-2 w-full md:w-5/12 transition-all">
@@ -64,7 +67,8 @@ const Home: React.FC = () => {
 						<span>Organize</span>
 					</h2>
 					<p className="text-gray-600">
-						Organize your notes by categories and tags for easy access.
+						Organize your notes by categories and tags for easy
+						access.
 					</p>
 				</div>
 				<div className="bg-indigo-100 p-6 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 m-2 w-full md:w-5/12 transition-all">
@@ -82,7 +86,8 @@ const Home: React.FC = () => {
 						<span>Share</span>
 					</h2>
 					<p className="text-gray-600">
-						Share your notes with others and collaborate in real-time.
+						Share your notes with others and collaborate in
+						real-time.
 					</p>
 				</div>
 			</div>

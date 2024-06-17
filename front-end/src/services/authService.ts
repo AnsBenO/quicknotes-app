@@ -1,6 +1,6 @@
 // src/services/authService.ts
 import axios from "axios";
-import { useAuth } from "../contexts/authContext";
+import { useAuth } from "../contexts/useAuth";
 
 const API_URL = "http://localhost:3003/api/users";
 

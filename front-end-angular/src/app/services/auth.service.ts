@@ -1,8 +1,7 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, take, tap } from 'rxjs/operators';
 import { LoginResponse, LogoutResponse, SignupResponse } from '../types/auth';
 
 const API_URL = 'http://localhost:3003/api/users';
@@ -15,10 +14,10 @@ export class AuthService {
     !!localStorage.getItem('authToken')
   );
   public isAuthenticated$ = this.loggedIn.asObservable();
-  private refreshTokenTimeout: any;
+  private refreshTokenTimeout!: any;
   token: WritableSignal<string | null> = signal<string | null>(null);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     const token = localStorage.getItem('authToken');
     if (token) {
       this.loggedIn.next(true);
@@ -54,11 +53,10 @@ export class AuthService {
         token: refreshToken,
       })
       .pipe(
-        map((response) => {
+        tap((response) => {
           if (response.token) {
             localStorage.setItem('authToken', response.token);
             this.startRefreshTokenTimer();
-            return response;
           }
           throw new Error('Invalid response');
         }),
@@ -71,14 +69,21 @@ export class AuthService {
   }
 
   private startRefreshTokenTimer() {
+    type TToken = {
+      exp: number;
+      iat: number;
+      userId: string;
+    };
     const token = localStorage.getItem('authToken');
     if (!token) return;
 
-    const jwtToken = JSON.parse(atob(token.split('.')[1]));
+    const jwtToken = JSON.parse(atob(token.split('.')[1])) as TToken;
     const expires = new Date(jwtToken.exp * 1000);
+    console.log(jwtToken);
+
     const timeout = expires.getTime() - Date.now() - 60 * 1000;
     this.refreshTokenTimeout = setTimeout(
-      () => this.refreshToken().subscribe(),
+      () => this.refreshToken().pipe(take(1)).subscribe(),
       timeout
     );
   }
@@ -109,6 +114,7 @@ export class AuthService {
           this.loggedIn.next(false);
           this.stopRefreshTokenTimer();
         },
+        error: (err) => throwError(() => err),
       })
     );
   }
