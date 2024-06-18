@@ -56,8 +56,6 @@ export class NoteCreateFormComponent {
   }
 
   public handleSubmit(): void {
-    console.log(this.noteForm.value);
-
     if (!this.noteForm.valid) {
       return;
     }
@@ -69,7 +67,7 @@ export class NoteCreateFormComponent {
       })
       .pipe(take(1))
       .subscribe({
-        next: () => this.router.navigate(['/notes']),
+        next: () => void this.router.navigate(['/notes']),
         error: (err) => {
           this.errorMessage.set(err.error.message || err.message);
           return throwError(() => err);

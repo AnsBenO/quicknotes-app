@@ -14,7 +14,6 @@ const NoteList: React.FC = () => {
 				try {
 					const data = await getNotes(token);
 					setNotes(data);
-					console.log(notes[0]);
 				} catch (error) {
 					console.error("Failed to fetch notes", error);
 				}

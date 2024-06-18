@@ -42,7 +42,6 @@ export class NoteDetailComponent implements OnInit, OnDestroy {
       this.getNote(id);
     } else {
       this.router.navigate(['/notes']);
-      return;
     }
   }
   private getNote(noteId: string) {

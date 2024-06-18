@@ -7,7 +7,8 @@ import { NextFunction, Request, Response } from "express";
 import { AuthenticatedRequest } from "../middleware/auth";
 dotenv.config();
 
-let secret: string = process.env.SESSION_SECRET as string;
+let SECRET: string = process.env["SESSION_SECRET"] as string;
+let REFRESH_SECRET: string = process.env["REFRESH_SECRET"] as string;
 
 export const getAuthenticatedUser = async (
 	req: AuthenticatedRequest,
@@ -43,7 +44,6 @@ export const signUp = async (
 	const username = body.username;
 	const email = body.email;
 	const passwordRaw = body.password;
-	console.log(secret);
 	try {
 		if (!username || !email || !passwordRaw) {
 			throw createHttpError(400, "All fields are required");
@@ -76,10 +76,10 @@ export const signUp = async (
 			email: email,
 			password: passwordHashed,
 		});
-		const token = jwt.sign({ userId: newUser._id }, secret, {
+		const token = jwt.sign({ userId: newUser._id }, SECRET, {
 			expiresIn: "15m",
 		});
-		const refreshToken = jwt.sign({ userId: newUser._id }, token, {
+		const refreshToken = jwt.sign({ userId: newUser._id }, REFRESH_SECRET, {
 			expiresIn: "7d",
 		});
 		res.status(201).json({ user: newUser, token, refreshToken });
@@ -120,10 +120,10 @@ export const login = async (
 			throw createHttpError(401, "Invalid credentials");
 		}
 
-		const token = jwt.sign({ userId: user._id }, secret, {
+		const token = jwt.sign({ userId: user._id }, SECRET, {
 			expiresIn: "15m",
 		});
-		const refreshToken = jwt.sign({ userId: user._id }, token, {
+		const refreshToken = jwt.sign({ userId: user._id }, REFRESH_SECRET, {
 			expiresIn: "7d",
 		});
 		res.status(200).json({ user, token, refreshToken });
@@ -137,14 +137,17 @@ export const refreshToken = async (
 	next: NextFunction
 ) => {
 	const { token } = req.body;
+
 	try {
 		if (!token) {
 			throw createHttpError(400, "Refresh token required");
 		}
-		const decoded = jwt.verify(token, secret) as { userId: string };
-		const newAccessToken = jwt.sign({ userId: decoded.userId }, secret, {
+		const decoded = jwt.verify(token, REFRESH_SECRET) as { userId: string };
+		const newAccessToken = jwt.sign({ userId: decoded.userId }, SECRET, {
 			expiresIn: "15m",
 		});
+		console.info("[new token] --> ", newAccessToken);
+
 		res.status(200).json({ token: newAccessToken });
 	} catch (error) {
 		next(error);

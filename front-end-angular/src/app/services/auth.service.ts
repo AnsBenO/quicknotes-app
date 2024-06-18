@@ -56,9 +56,11 @@ export class AuthService {
         tap((response) => {
           if (response.token) {
             localStorage.setItem('authToken', response.token);
+            this.token.set(response.token);
             this.startRefreshTokenTimer();
+          } else {
+            throw new Error('Invalid response');
           }
-          throw new Error('Invalid response');
         }),
         catchError((err) => {
           this.logoutUser().subscribe();
