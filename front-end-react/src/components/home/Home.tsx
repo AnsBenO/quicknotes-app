@@ -30,7 +30,7 @@ const Home: React.FC = () => {
 						Your ultimate note-taking app. Organize your thoughts,
 						ideas, and tasks effortlessly.
 					</p>
-					{!loggedIn ? (
+					{!loggedIn && (
 						<div className="flex justify-center space-x-4">
 							<Link to="/login">
 								<button className="bg-blue-600 text-white py-2 px-6 rounded-full shadow-md hover:bg-blue-500 hover:scale-105 transition-all flex items-center space-x-2">
@@ -45,8 +45,6 @@ const Home: React.FC = () => {
 								</button>
 							</Link>
 						</div>
-					) : (
-						<div></div>
 					)}
 				</div>
 			</div>

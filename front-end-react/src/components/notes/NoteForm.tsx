@@ -33,10 +33,17 @@ const NoteForm: React.FC = () => {
 					<h2>Create Note</h2>
 				</div>
 				<div className="mb-4">
-					<label className="block text-gray-700 mb-2">Title</label>
+					<label
+						htmlFor="title"
+						className="block text-gray-700 mb-2"
+					>
+						Title
+					</label>
 					<div className="relative">
 						<FaHeading className="absolute top-1/2 transform -translate-y-1/2 left-3 text-gray-400" />
 						<input
+							id="title"
+							name="title"
 							type="text"
 							value={title}
 							onChange={(e) => setTitle(e.target.value)}
@@ -45,10 +52,17 @@ const NoteForm: React.FC = () => {
 					</div>
 				</div>
 				<div className="mb-6">
-					<label className="block text-gray-700 mb-2">Text</label>
+					<label
+						htmlFor="text"
+						className="block text-gray-700 mb-2"
+					>
+						Text
+					</label>
 					<div className="relative">
 						<FaStickyNote className="absolute top-1/2 transform -translate-y-1/2 left-3 text-gray-400" />
 						<textarea
+							id="text"
+							name="text"
 							value={text}
 							onChange={(e) => setText(e.target.value)}
 							className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-500"
